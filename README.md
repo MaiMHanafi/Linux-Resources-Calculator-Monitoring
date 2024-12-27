@@ -13,7 +13,7 @@ This project monitors key Linux system resources (CPU, memory, disk usage, and n
    - [Run the Docker Container](#Run-the-Docker-Container)
    - [Push to Docker Hub](#Push-to-Docker-Hub)
 5. [Technologies Used](#Technologies-Used)
-6. [Contributing](#Contributing)
+6. [Repository Links](#Repository-Links)
 
 ## **Project Overview**
 This project calculates and displays system resource data like:
