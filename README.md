@@ -137,5 +137,5 @@ docker push <DockerHub-Username>/<Your-Image-Name>:<Image-Tag>
 - **Git**: To manage and version control the source code.
 
 ## **Repository Links**
-- [LinkedIn Profile](linkedin.com/in/mai-mohamed-hanafi-388b131b5)
+- [LinkedIn Profile](https://linkedin.com/in/mai-mohamed-hanafi-388b131b5)
 - [Docker Hub](https://hub.docker.com/repository/docker/maihanafi/linux-resource-monitor/general)
