@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DEPI Linux Resource Monitor - Project made by maihanafi34@gmail.com</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>DEPI Linux Resources Calculator - Project made by maihanafi34@gmail.com</h1>
+    <h2>CPU Usage</h2>
+    <p>{{ data['cpu_usage'] }}%</p>
+    <h2>Memory Info</h2>
+    <ul>
+        {% for key, value in data['memory_info'].items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Disk Usage</h2>
+    <ul>
+        {% for key, value in data['disk_usage'].items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Network Stats</h2>
+    <ul>
+        {% for key, value in data['network_stats'].items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Subtitle Below the Title -->
+    <h3 style="text-align: center; color: #555;">Project made by: <a href="mailto:maihanafi34@gmail.com">maihanafi34@gmail.com</a></h3>
+
+    <!-- Footer Section -->
+    <footer>
+        <hr>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/mai-mohamed-hanafi-388b131b5" target="_blank">www.linkedin.com/in/mai-mohamed-hanafi-388b131b5</a></p>
+    </footer>
+</body>
+</html>
