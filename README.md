@@ -13,7 +13,8 @@ This project monitors key Linux system resources (CPU, memory, disk usage, and n
    - [Run the Docker Container](#Run-the-Docker-Container)
    - [Push to Docker Hub](#Push-to-Docker-Hub)
 5. [Technologies Used](#Technologies-Used)
-6. [Repository Links](#Repository-Links)
+6. [How to use - Guide](#How-to-use---Guide)
+7. [Repository Links](#Repository-Links)
 
 ## **Project Overview**
 This project calculates and displays system resource data like:
@@ -135,6 +136,43 @@ docker push <DockerHub-Username>/<Your-Image-Name>:<Image-Tag>
 - **psutil**: To retrieve system information such as CPU, memory, disk, and network stats.
 - **Docker**: To containerize the application for easy deployment.
 - **Git**: To manage and version control the source code.
+#How to use Guide
+
+## **How to use - Guide**
+## Docker Image
+The Docker image for this project is hosted on Docker Hub. You can pull the image and run it on your machine or server using the following commands.
+
+### Docker Image URL:
+[Docker Hub: maihanafi/linux-resource-monitor](https://hub.docker.com/repository/docker/maihanafi/linux-resource-monitor/general)
+
+### Pull the Docker Image:
+
+To pull the latest image from Docker Hub, run the following command:
+
+```bash
+docker pull maihanafi/linux-resource-monitor:latest
+```
+### How to Run the Application ?
+Once you have pulled the Docker image, you can run the application in a Docker container, using the following command:
+```bash
+docker run -d -p 5000:5000 --name linux-resource-monitor maihanafi/linux-resource-monitor
+```
+### Access the Web Interface:
+Once the container is running, To be able to see the system resources data displayed on the web page, Open your browser and navigate to:
+
+```bash
+http://localhost:5000
+```
+
+### Contributing
+If you'd like to contribute to this project, please fork the repository, make your changes, and create a pull request. All contributions are welcome!
+
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Commit your changes.
+5. Push to your fork.
+6. Open a pull request.
 
 ## **Repository Links**
 - [LinkedIn Profile](https://linkedin.com/in/mai-mohamed-hanafi-388b131b5)
