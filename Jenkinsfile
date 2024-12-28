@@ -16,7 +16,7 @@ pipeline {
                     echo "Pulling Docker image from Docker Hub..."
                     // Log in to Docker Hub before pulling the image
                     sh """
-                    docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW}
+                    docker login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW
                     docker pull ${DOCKER_IMAGE}
                     """
                 }
@@ -29,7 +29,7 @@ pipeline {
                     echo "Deploying Docker container on production server..."
                     sshagent (credentials: ['prod-ssh-key']) {
                         bash """
-                        ssh ${PROD_USER}@${PROD_SERVER} <<EOF
+                        ssh $PROD_USER@$PROD_SERVER <<EOF
                         set -x
                         sudo docker pull ${DOCKER_IMAGE}
                         sudo docker stop linux-resource-monitor || true
