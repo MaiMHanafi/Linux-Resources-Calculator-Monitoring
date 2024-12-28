@@ -6,7 +6,7 @@ pipeline {
         PROD_SERVER = "107.23.124.136"
         PROD_USER = "ubuntu" // SSH username on the production server
         PROD_KEY = credentials('prod-ssh-key') // Jenkins credentials for SSH key
-        DOCKERHUB_CREDS = credentials('prod-dockerhub-credentials') // DockerHub credentials (username/password or token)
+        DOCKERHUB_CREDS = credentials('docker-hub-credentials') // DockerHub credentials (username/password or token)
     }
 
     stages {
