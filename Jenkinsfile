@@ -24,7 +24,7 @@ pipeline {
                     echo "Deploying Docker container on production server..."
                     sshagent (credentials: ['prod-ssh-key']) {
                         sh """
-                        ssh ${PROD_USER}@${PROD_SERVER} <<EOF
+                        ssh -o StrictHostKeyChecking=no ${PROD_USER}@${PROD_SERVER} <<EOF
                         docker pull ${DOCKER_IMAGE}
                         docker stop linux-resource-monitor || true
                         docker rm linux-resource-monitor || true
