@@ -6,6 +6,7 @@ pipeline {
         PROD_SERVER = "107.23.124.136"
         PROD_USER = "ubuntu" // SSH username on the production server
         PROD_KEY = credentials('prod-ssh-key') // Jenkins credentials for SSH key
+        DOCKERHUB_CREDS = credentials('prod-dockerhub-credentials') // DockerHub credentials (username/password or token)
     }
 
     stages {
@@ -13,7 +14,11 @@ pipeline {
             steps {
                 script {
                     echo "Pulling Docker image from Docker Hub..."
-                    sh "docker pull ${DOCKER_IMAGE}"
+                    // Log in to Docker Hub before pulling the image
+                    sh """
+                    docker login -u ${DOCKERHUB_CREDS_USR} -p ${DOCKERHUB_CREDS_PSW}
+                    docker pull ${DOCKER_IMAGE}
+                    """
                 }
             }
         }
@@ -46,11 +51,6 @@ pipeline {
         }
         failure {
             echo "There was an error during deployment."
-        }
-    }
-}
-        failure {
-            echo 'There was an error during deployment.'
         }
     }
 }
