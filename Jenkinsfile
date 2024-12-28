@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "maihanafi/linux-resource-monitor:latest"
         PROD_SERVER = "your-prod-server-ip"
-        PROD_USER = "username" // SSH username on the production server
+        PROD_USER = "ubuntu" // SSH username on the production server
         PROD_KEY = credentials('prod-ssh-key') // Jenkins credentials for SSH key
     }
 
