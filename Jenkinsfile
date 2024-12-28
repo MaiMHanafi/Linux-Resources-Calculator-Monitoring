@@ -16,7 +16,7 @@ pipeline {
                     echo "Pulling Docker image from Docker Hub..."
                     // Log in to Docker Hub before pulling the image
                     sh """
-                    docker login -u maihanafi -p "mai202097"
+                    docker login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW
                     docker pull ${DOCKER_IMAGE}
                     """
                 }
