@@ -30,10 +30,10 @@ pipeline {
                     sshagent (credentials: ['prod-ssh-key']) {
                         sh """
                         ssh ${PROD_USER}@${PROD_SERVER} <<EOF
-                        docker pull ${DOCKER_IMAGE}
-                        docker stop linux-resource-monitor || true
-                        docker rm linux-resource-monitor || true
-                        docker run -d --name linux-resource-monitor -p 5000:5000 ${DOCKER_IMAGE}
+                        sudo docker pull ${DOCKER_IMAGE}
+                        sudo docker stop linux-resource-monitor || true
+                        sudo docker rm linux-resource-monitor || true
+                        sudo docker run -d --name linux-resource-monitor -p 5000:5000 ${DOCKER_IMAGE}
                         EOF
                         """
                     }
