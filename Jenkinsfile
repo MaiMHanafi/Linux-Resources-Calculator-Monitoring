@@ -30,6 +30,7 @@ pipeline {
                     sshagent (credentials: ['prod-ssh-key']) {
                         sh """
                         ssh ${PROD_USER}@${PROD_SERVER} <<EOF
+                        set -x
                         sudo docker pull ${DOCKER_IMAGE}
                         sudo docker stop linux-resource-monitor || true
                         sudo docker rm linux-resource-monitor || true
