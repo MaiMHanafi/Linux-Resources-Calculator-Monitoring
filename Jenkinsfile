@@ -28,7 +28,7 @@ pipeline {
                 script {
                     echo "Deploying Docker container on production server..."
                     sshagent (credentials: ['prod-ssh-key']) {
-                        sh """
+                        bash """
                         ssh ${PROD_USER}@${PROD_SERVER} <<EOF
                         set -x
                         sudo docker pull ${DOCKER_IMAGE}
