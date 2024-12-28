@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     environment {
-        PROD_KEY = credentials('prod-dockerhub-credentials')
+        DOCKER_IMAGE = "maihanafi/linux-resource-monitor:latest"
+        PROD_SERVER = "107.23.124.136"
+        PROD_USER = "ubuntu" // SSH username on the production server
+        PROD_KEY = credentials('prod-ssh-key') // Jenkins credentials for SSH key
     }
 
     stages {
@@ -10,42 +13,42 @@ pipeline {
             steps {
                 script {
                     echo "Pulling Docker image from Docker Hub..."
-                    sh 'docker pull maihanafi/linux-resource-monitor:latest'
+                    sh "docker pull ${DOCKER_IMAGE}"
                 }
             }
         }
+
         stage('Deploy to Production Server') {
             steps {
-                sshagent(['ubuntu']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@107.23.124.136 << 'EOF'
-                        set -e  # Exit immediately if a command exits with a non-zero status
-                        echo "Pulling the latest Docker image..."
-                        docker pull maihanafi/linux-resource-monitor:latest
-                        
-                        echo "Stopping existing container if it exists..."
+                script {
+                    echo "Deploying Docker container on production server..."
+                    sshagent (credentials: ['prod-ssh-key']) {
+                        sh """
+                        ssh ${PROD_USER}@${PROD_SERVER} <<EOF
+                        docker pull ${DOCKER_IMAGE}
                         docker stop linux-resource-monitor || true
-                        
-                        echo "Removing existing container if it exists..."
                         docker rm linux-resource-monitor || true
-                        
-                        echo "Starting a new container..."
-                        docker run -d --name linux-resource-monitor -p 8080:8080 maihanafi/linux-resource-monitor:latest
-                        
-                        echo "Deployment successful!"
+                        docker run -d --name linux-resource-monitor -p 5000:5000 ${DOCKER_IMAGE}
                         EOF
-                    """
+                        """
+                    }
                 }
             }
         }
     }
+
     post {
         always {
-            echo 'Pipeline completed.'
+            echo "Pipeline completed."
         }
         success {
-            echo 'Deployment succeeded!'
+            echo "Docker image successfully deployed to production."
         }
+        failure {
+            echo "There was an error during deployment."
+        }
+    }
+}
         failure {
             echo 'There was an error during deployment.'
         }
